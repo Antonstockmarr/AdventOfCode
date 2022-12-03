@@ -3,7 +3,6 @@ use std::iter::Peekable;
 
 fn priority(letter : char) -> i32 {
     let ascii = letter as i32;
-    println!("{}", ascii);
     if ascii < 91 {
         return ascii - 64 + 26;
     }
@@ -16,16 +15,13 @@ fn calculate_part_one_sum(lines: &mut Peekable<std::str::Lines<'_>>) {
     let mut sum = 0;
     while lines.peek().is_some() {
         let current = lines.next().unwrap();
-        println!("current {}", current);
         
         let letters : Vec<char> = current.chars().collect();
         let n = letters.len();
         'outer: for i in 0..(n/2) {
             for j in (n/2)..n {
                 if letters[i] == letters[j] {
-                    println!("{}",letters[i]);
                     sum += priority(letters[i]);
-                    println!("{}",priority(letters[i]));
                     break 'outer;
                 }
             }
@@ -49,7 +45,6 @@ fn calculate_part_two_sum(lines: &mut Peekable<std::str::Lines<'_>>) {
                 if *a == *b {
                     for c in third_letters.iter() {
                         if *a == *c {
-                            println!("{}",*a);
                             sum += priority(*a);
                             break 'outer;
                         }
